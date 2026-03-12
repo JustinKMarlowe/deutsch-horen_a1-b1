@@ -1,13 +1,19 @@
-const CACHE = 'dh-v11';
+const CACHE = 'dh-v10';
 const STATIC = [
-  '/deutsch-horen_a1-b1/',
-  '/deutsch-horen_a1-b1/index.html',
-  '/deutsch-horen_a1-b1/manifest.json',
-  '/deutsch-horen_a1-b1/assets/index-e53d4196.js'
+  '/deutsch-horen/',
+  '/deutsch-horen/index.html',
+  '/deutsch-horen/manifest.json',
+  '/deutsch-horen/assets/index.js'
+];
+const CDN = [
+  'https://unpkg.com/react@18.3.1/umd/react.production.min.js',
+  'https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js'
 ];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(STATIC)));
+  e.waitUntil(
+    caches.open(CACHE).then(c => c.addAll([...STATIC, ...CDN]))
+  );
   self.skipWaiting();
 });
 self.addEventListener('activate', e => {
